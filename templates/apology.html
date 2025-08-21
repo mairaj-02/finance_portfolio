@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}
+    {{ top }}
+{% endblock %}
+{% block main %}
+    <div class="fade-in">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                        <h3 class="mb-3">{{ top }}</h3>
+                        <p class="mb-4">{{ bottom }}</p>
+                        <a href="/" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

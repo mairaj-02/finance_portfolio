@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block title %}
+    Portfolio
+{% endblock %}
+{% block main %}
+    <div class="fade-in">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-4">Your Portfolio</h1>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Portfolio Value</h5>
+                        <h2 class="mb-0">{{ grand_total | usd }}</h2>
+                        <div class="mt-auto pt-3">
+                            <a href="/buy" class="btn btn-primary w-100">
+                                <i class="fas fa-plus-circle me-2"></i> Buy Stocks
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Available Cash</h5>
+                        <h2 class="mb-0">{{ cash | usd }}</h2>
+                        <div class="mt-auto pt-3">
+                            <a href="/sell" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-minus-circle me-2"></i> Sell Stocks
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Stocks Owned</h5>
+                        <h2 class="mb-0">{{ stocks | length }}</h2>
+                        <div class="mt-auto pt-3">
+                            <a href="/history" class="btn btn-outline-primary w-100">
+                                <i class="fas fa-history me-2"></i> View History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Stock Holdings</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Name</th>
+                                <th>Shares</th>
+                                <th>Price</th>
+                                <th>Total Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stock in stocks %}
+                                <tr>
+                                    <td><strong>{{ stock.symbol }}</strong></td>
+                                    <td>{{ stock.name }}</td>
+                                    <td>{{ stock.shares }}</td>
+                                    <td>{{ stock.price | usd }}</td>
+                                    <td>{{ stock.total | usd }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="4"><strong>Cash</strong></td>
+                                <td><strong>{{ cash | usd }}</strong></td>
+                            </tr>
+                            <tr class="table-active">
+                                <td colspan="4"><strong>Grand Total</strong></td>
+                                <td><strong>{{ grand_total | usd }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

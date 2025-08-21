@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}
+    Stock Quote
+{% endblock %}
+{% block main %}
+    <div class="fade-in">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Quote Results</h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mb-4">
+                            <h2>{{ stock.name }} ({{ stock.symbol }})</h2>
+                        </div>
+                        
+                        <div class="display-4 mb-4">
+                            {{ stock.price | usd }}
+                        </div>
+                        
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="/buy?symbol={{ stock.symbol }}" class="btn btn-primary">
+                                <i class="fas fa-shopping-cart me-2"></i> Buy
+                            </a>
+                            <a href="/sell?symbol={{ stock.symbol }}" class="btn btn-outline-primary">
+                                <i class="fas fa-hand-holding-usd me-2"></i> Sell
+                            </a>
+                            <a href="/quote" class="btn btn-outline-primary">
+                                <i class="fas fa-redo me-2"></i> Another Quote
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="/" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

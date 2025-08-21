@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}
+    Transaction History
+{% endblock %}
+{% block main %}
+    <div class="fade-in">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="mb-4">Transaction History</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Your Transactions</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Symbol</th>
+                                <th>Transaction</th>
+                                <th>Shares</th>
+                                <th>Price</th>
+                                <th>Total Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in transactions %}
+                                <tr>
+                                    <td>{{ transaction.timestamp }}</td>
+                                    <td><strong>{{ transaction.symbol }}</strong></td>
+                                    <td>
+                                        {% if transaction.shares > 0 %}
+                                            <span class="badge bg-success">BUY</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">SELL</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ transaction.shares | abs }}</td>
+                                    <td>{{ transaction.price | usd }}</td>
+                                    <td>{{ (transaction.shares * transaction.price) | abs | usd }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+{% endblock %}
