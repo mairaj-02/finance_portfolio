@@ -85,7 +85,7 @@ def buy():
             return apology("must provide positive integer shares", 400)
         
         shares = int(shares)
-        stock = lookup(symbol)
+        stock = lookup(symbol.upper())
         if stock is None:
             return apology("invalid symbol", 400)
         
@@ -186,7 +186,7 @@ def quote():
         if not symbol:
             return apology("must provide symbol", 400)
         
-        stock = lookup(symbol)
+        stock = lookup(symbol.upper())
         if stock is None:
             return apology("invalid symbol", 400)
         
@@ -252,13 +252,13 @@ def sell():
             FROM transactions
             WHERE user_id = ? AND symbol = ?
             GROUP BY symbol
-        """, session["user_id"], symbol)
+        """, session["user_id"], symbol.upper())
         
         if not stock_rows or stock_rows[0]["total_shares"] < shares:
             return apology("not enough shares", 400)
         
         # Get current price
-        stock = lookup(symbol)
+        stock = lookup(symbol.upper())
         if stock is None:
             return apology("invalid symbol", 400)
         
